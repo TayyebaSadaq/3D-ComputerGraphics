@@ -44,9 +44,12 @@ private:
 
 	// The default constructor for the Matrix class initialises the matrix to the Identity matrix.  
 
-	Matrix							_worldTransformation;
+	Matrix                            _worldTransformation;  // Transformation of the first cube 
+	Matrix                          _worldTransformation2; // Transformation for the second cube
 	Matrix							_viewTransformation;
 	Matrix							_projectionTransformation;
+	
+	float				_rotationAngle{ 0 };	//change to float
 
 	bool GetDeviceAndSwapChain();
 	void BuildGeometryBuffers();

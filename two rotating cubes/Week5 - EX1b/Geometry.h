@@ -2,14 +2,14 @@
 
 #define ShaderFileName		L"shader.hlsl"
 #define VertexShaderName	"VS"
-#define PixelShaderName		"PS"
+#define PixelShaderName		"PS" 
 
 // Format of the constant buffer. This must match the format of the
 // cbuffer structure in the shader
 
 struct CBuffer
 {
-	Matrix		WorldViewProjection;
+	Matrix		WorldViewProjection; 
 };
 
 // Structure of a single vertex.  This must match the
@@ -17,7 +17,7 @@ struct CBuffer
 
 struct Vertex
 {
-	Vector4		Position;
+	Vector4		Position; //pass x, y, z, w
 };
 
 // The description of the vertex that is passed to CreateInputLayout.  This must
@@ -33,23 +33,28 @@ D3D11_INPUT_ELEMENT_DESC vertexDesc[] =
 
 
 Vertex vertices[] =
-{
+{	
+	//cube centered on origin and 2 units wide
+	
 	{ Vector4(-1.0f, -1.0f, -1.0f, 1.0f) },
 	{ Vector4(-1.0f, +1.0f, -1.0f, 1.0f) },
+	
 	{ Vector4(+1.0f, +1.0f, -1.0f, 1.0f) },
 	{ Vector4(+1.0f, -1.0f, -1.0f, 1.0f) },
+	
 	{ Vector4(-1.0f, -1.0f, +1.0f, 1.0f) },
 	{ Vector4(-1.0f, +1.0f, +1.0f, 1.0f) },
+	
 	{ Vector4(+1.0f, +1.0f, +1.0f, 1.0f) },
-	{ Vector4(+1.0f, -1.0f, +1.0f, 1.0f) }
+	{ Vector4(+1.0f, -1.0f, +1.0f, 1.0f) },
 };
 
 UINT indices[] = {
-	// front face
-	0, 1, 2,
+	// front face 
+	0, 1, 2, 
 	0, 2, 3,
 
-	// back face
+	// back face 
 	4, 6, 5,
 	4, 7, 6,
 

@@ -15,7 +15,7 @@ DirectXApp::DirectXApp() : Framework(800, 600)
 {
 	// Initialise vectors used to create camera.  We will look
 	// at this in detail later
-	_eyePosition = Vector3(1.0f, 20.0f, -10.0f);
+	_eyePosition = Vector3(0.0f, 2.5f, -10.0f);
 	_focalPointPosition = Vector3(0.0f, 0.0f, 0.0f);
 	_upVector = Vector3(0.0f, 1.0f, 0.0f);
 }
@@ -38,8 +38,10 @@ bool DirectXApp::Initialise()
 
 void DirectXApp::Update()
 {
-	// This is where you would update world transformations
-} 
+	_worldTransformation = Matrix::CreateRotationY(_rotationAngle) * Matrix::CreateTranslation(Vector3(0, 2, 0));
+	_worldTransformation2 = Matrix::CreateRotationY(-_rotationAngle);
+	_rotationAngle += XMConvertToRadians(1.0f);
+}
  
 void DirectXApp::Render()
 {
@@ -83,7 +85,12 @@ void DirectXApp::Render()
 
 	// Now draw the object
 	_deviceContext->DrawIndexed(ARRAYSIZE(indices), 0, 0);
-	_deviceContext->DrawIndexed(ARRAYSIZE(indices), 0, 2);
+
+	// Rendering second cube
+	Matrix completeTransformation2 = _worldTransformation2 * _viewTransformation * _projectionTransformation;
+	constantBuffer.WorldViewProjection = completeTransformation2;
+	_deviceContext->UpdateSubresource(_constantBuffer.Get(), 0, 0, &constantBuffer, 0, 0);
+	_deviceContext->DrawIndexed(ARRAYSIZE(indices), 0, 0);
 
 	// Update the window
 	ThrowIfFailed(_swapChain->Present(0, 0));
