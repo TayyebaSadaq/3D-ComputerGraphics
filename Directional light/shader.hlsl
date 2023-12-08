@@ -8,6 +8,7 @@ cbuffer ConstantBuffer
 struct VertexIn
 {
 	float3 InputPosition : POSITION;
+    float3 Normal			: NORMAL;
 };
 
 struct VertexOut
